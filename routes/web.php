@@ -19,12 +19,26 @@ Route::get('/', function () {
 
 Route::prefix('gendre')->group(function () {
     Route::get('/', 'GendreController@index');
-    Route::post('/', 'GendreController@store');
+    Route::post('/save', 'GendreController@store');
     Route::get('/{id}', 'GendreController@show');
+    Route::post('/update/{id}', 'GendreController@update');
 });
 
 Route::prefix('director')->group(function () {
     Route::get('/', 'DirectorController@index');
-    // Route::post('/save', 'GendreController@data');
-    // Route::get('/{id}', 'GendreController@show');
+    Route::post('/', 'DirectorController@store');
+    Route::get('/{id}', 'DirectorController@show');
 });
+
+Route::prefix('actor')->group(function () {
+    Route::get('/', 'ActorController@index');
+    // Route::post('/', 'DirectorController@store');
+    // Route::get('/{id}', 'DirectorController@show');
+});
+
+Route::prefix('movie')->group(function () {
+    Route::get('/', 'MovieController@index');
+    // Route::post('/', 'DirectorController@store');
+    Route::get('/{id}', 'MovieController@show');
+});
+

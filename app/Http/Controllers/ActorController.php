@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Director;
+use App\Model\Actor;
 use DB;
 use Validator;
 
-class DirectorController extends Controller
+class ActorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $data = Director::all();
+        $data = Actor::all();
   
         return response()->json([
             'success' => true,
@@ -59,7 +59,7 @@ class DirectorController extends Controller
             ], 401);
         }
 
-        $data= new Director();
+        $data= new Actor();
         $data->name=$request->input('name');
         $data->date_of_birth=$request->input('date_of_birth');
         $data->gender=$request->input('gender');
@@ -100,14 +100,14 @@ class DirectorController extends Controller
     {
        
         //
-        $data=Director::where('id',$id)->get();
+        $data=Actor::where('id',$id)->get();
        
         if(count($data) == 0 ){
             // dd('gagakllll');
             return response()->json([
                 'success' => false,
                 'status' => 400,
-                'message' => 'Director with id ' . $id . ' not found'
+                'message' => 'Actor with id ' . $id . ' not found'
             ], 400);
         }else{
             // dd('success');

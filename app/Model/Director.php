@@ -19,4 +19,9 @@ class Director extends Model
      * @var array
      */
     protected $fillable = ['name','date_of_birth', 'gender'];
+
+    public function movie()
+	{
+		return $this->hasMany(\App\Model\Movie::class, 'id_director');
+	}
 }

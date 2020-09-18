@@ -19,4 +19,9 @@ class Gendre extends Model
      * @var array
      */
     protected $fillable = ['name','description'];
+
+    public function movie()
+	{
+		return $this->hasMany(\App\Model\Movie::class, 'id_gendre');
+	}
 }

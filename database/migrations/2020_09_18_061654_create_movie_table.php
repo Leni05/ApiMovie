@@ -23,6 +23,7 @@ class CreateMovieTable extends Migration
             $table->time('duration')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

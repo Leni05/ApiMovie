@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Gendre;
 use DB;
+use Validator;
 
 class GendreController extends Controller
 {
@@ -100,6 +101,48 @@ class GendreController extends Controller
                 'status' => 200,
                 'message' => $data
             ], 200);
+        }
+    }
+
+    public function update(Request $request, $id){
+
+        $validator= Validator::make($request->all(),[
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        $data=Gendre::where('id',$id)->first();
+         
+        if (empty($data)) {
+
+            dd('kosong');
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Gendre with id ' . $id . ' not found'
+            ], 400);
+        } 
+      
+
+        if($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'status' => 401,
+                'error'=>$validator->errors()
+            ], 401);
+        }
+
+        $data->name=$request->input('name');
+        $data->description=$request->input('description');
+       
+        if($data->save()){
+            $res["message"]="Sukses";
+            $res["status"]=200;
+            $res["value"]=$data;
+            return response($res);
+        } else{
+            $res["status"]=400;
+            $res["message"]="Gagal";
+            return response($res);
         }
     }
 }

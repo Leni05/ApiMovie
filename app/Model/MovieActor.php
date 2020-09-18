@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movie extends Model
+class MovieActor extends Model
 {
     /**
      * The table associated with the model.
@@ -19,4 +19,14 @@ class Movie extends Model
      * @var array
      */
     protected $fillable = ['id_movie','id_actor'];
+
+    // public function movie()
+    // {
+    //     return $this->belongsTo(\App\Model\Movie::class, 'id_movie');
+    // }
+
+    // public function actor()
+    // {
+    //     return $this->belongsTo(\App\Model\Actor::class, 'id_actor');
+    // }
 }
