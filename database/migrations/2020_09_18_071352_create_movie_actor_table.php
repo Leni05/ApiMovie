@@ -15,8 +15,8 @@ class CreateMovieActorTable extends Migration
     {
         Schema::create('movie_actor', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_movie');
-            $table->integer('id_actor');
+            $table->integer('movie_id');
+            $table->integer('actor_id');
             $table->timestamps();
         });
     }

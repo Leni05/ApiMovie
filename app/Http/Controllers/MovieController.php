@@ -20,7 +20,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $data = Movie::with(['director','gendre'])->get();
+        $data = Movie::with(['director','gendre', 'actor'])->get();
         // dd($data);
   
         return response()->json([

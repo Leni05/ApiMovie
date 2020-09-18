@@ -16,29 +16,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//CRUD Gendre
+// Route::prefix('gendre')->group(function () {
+//     Route::get('gendre/', 'GendreController@index');
+//     Route::post('/save', 'GendreController@store');
+//     Route::get('/{id}', 'GendreController@show');
+//     Route::put('/update/{id}', 'GendreController@update');
+// });
 
-Route::prefix('gendre')->group(function () {
-    Route::get('/', 'GendreController@index');
-    Route::post('/save', 'GendreController@store');
-    Route::get('/{id}', 'GendreController@show');
-    Route::post('/update/{id}', 'GendreController@update');
-});
+// Route::prefix('director')->group(function () {
+//     Route::get('/', 'DirectorController@index');
+//     Route::post('/', 'DirectorController@store');
+//     Route::get('/{id}', 'DirectorController@show');
+// });
 
-Route::prefix('director')->group(function () {
-    Route::get('/', 'DirectorController@index');
-    Route::post('/', 'DirectorController@store');
-    Route::get('/{id}', 'DirectorController@show');
-});
+// Route::prefix('actor')->group(function () {
+//     Route::get('/', 'ActorController@index');
+//     // Route::post('/', 'DirectorController@store');
+//     // Route::get('/{id}', 'DirectorController@show');
+// });
 
-Route::prefix('actor')->group(function () {
-    Route::get('/', 'ActorController@index');
-    // Route::post('/', 'DirectorController@store');
-    // Route::get('/{id}', 'DirectorController@show');
-});
-
-Route::prefix('movie')->group(function () {
-    Route::get('/', 'MovieController@index');
-    // Route::post('/', 'DirectorController@store');
-    Route::get('/{id}', 'MovieController@show');
-});
+// Route::prefix('movie')->group(function () {
+//     Route::get('/', 'MovieController@index');
+//     // Route::post('/', 'DirectorController@store');
+//     Route::get('/{id}', 'MovieController@show');
+// });
 

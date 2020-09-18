@@ -16,6 +16,7 @@ class GendreController extends Controller
      */
     public function index()
     {
+        dd('a');
         $data = Gendre::all();
   
         return response()->json([
