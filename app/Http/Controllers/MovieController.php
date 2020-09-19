@@ -238,7 +238,6 @@ class MovieController extends Controller
         }
         $movie = Movie::with(['director','gendre', 'actor'])->where('id',$id)->first();
         $movieactor = MovieActor::where('movie_id',$id)->get();
-        // dd($movieactor);
        
         if($movie){
             
@@ -248,6 +247,7 @@ class MovieController extends Controller
           
             $movieactor->each->delete();
             $data->delete();
+            
             return response($res);
         } else{
             $res["message"]="gagal";
