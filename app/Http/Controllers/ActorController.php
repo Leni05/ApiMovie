@@ -47,7 +47,7 @@ class ActorController extends Controller
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
-            'gender' => 'required',
+            'gender' => 'required|integer',
         ]);
 
         if($validator->fails()){
@@ -104,14 +104,12 @@ class ActorController extends Controller
         $data=Actor::where('id',$id)->get();
        
         if(count($data) == 0 ){
-            // dd('gagakllll');
             return response()->json([
                 'success' => false,
                 'status' => 400,
                 'message' => 'Actor with id ' . $id . ' not found'
             ], 400);
         }else{
-            // dd('success');
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -125,7 +123,7 @@ class ActorController extends Controller
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
-            'gender' => 'required',
+            'gender' => 'required|integer',
         ]);
 
         $data=Actor::where('id',$id)->first();
@@ -157,7 +155,7 @@ class ActorController extends Controller
                 'message' => 'check inputan your gender'
             ], 400);
         }
-// dd($request);
+
         $data->name=$request->input('name');
         $data->date_of_birth=$request->input('date_of_birth');
         $data->gender=$gender;

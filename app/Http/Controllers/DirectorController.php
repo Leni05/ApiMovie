@@ -46,7 +46,7 @@ class DirectorController extends Controller
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
-            'gender' => 'required',
+            'gender' => 'required|integer',
         ]);
 
         if($validator->fails()){
@@ -56,13 +56,10 @@ class DirectorController extends Controller
                 'error'=>$validator->errors()
             ], 401);
         }
-       
 
         if($request->input('gender') == 1 ) {
-            // dd('aaaaaa');
             $gender = "laki-laki";
         } else  if($request->input('gender') == 2 ) {
-            // dd('aaaaaa');
             $gender = "perempuan";
         } else{
             return response()->json([
@@ -120,7 +117,7 @@ class DirectorController extends Controller
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
-            'gender' => 'required',
+            'gender' => 'required|integer',
         ]);
 
         $data=Director::where('id',$id)->first();

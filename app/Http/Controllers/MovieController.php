@@ -22,7 +22,6 @@ class MovieController extends Controller
     public function index()
     {
         $data = Movie::with(['director','gendre', 'actor'])->get();
-        // dd($data);
   
         return response()->json([
             'success' => true,
@@ -31,21 +30,18 @@ class MovieController extends Controller
         ]);
     }
    
-    // return response()->json(['data' => $users]);
 
     public function show($id)
     {   
         $data = Movie::with(['director','gendre', 'actor'])->where('id',$id)->get();
        
         if(count($data) == 0 ){
-            // dd('gagakllll');
             return response()->json([
                 'success' => false,
                 'status' => 400,
                 'message' => 'Actor with id ' . $id . ' not found'
             ], 400);
         }else{
-            // dd('success');
             return response()->json([
                 'success' => true,
                 'status' => 200,
@@ -77,9 +73,7 @@ class MovieController extends Controller
         $genre=Gendre::where('id',$request->input('id_genre'))->first();
         $actor=$request->input('actor');
 
-        // dd($director);
         if (empty($director)) {
-            // dd('aaaa');
             return response()->json([
                 'success' => false,
                 'status' => 400,
@@ -87,7 +81,6 @@ class MovieController extends Controller
             ], 400);
         } 
         if (empty($genre)) {
-            // dd('nbbbb');
             return response()->json([
                 'success' => false,
                 'status' => 400,
@@ -105,14 +98,11 @@ class MovieController extends Controller
             $data->year=$request->input('year');
             $data->duration=$request->input('duration');
             $data->save();
-            // dd($data->id);
     
             
             foreach ($actor as $i => $item) {
-                // dd($request->input('actor')[$i]);
                 $actorid=actor::where('id',$request->input('actor')[$i])->first();
                 if (empty($actorid)) {
-                    // dd('nbbbb');
                     return response()->json([
                         'success' => false,
                         'status' => 400,
@@ -177,9 +167,7 @@ class MovieController extends Controller
         $genre=Gendre::where('id',$request->input('id_genre'))->first();
         $actor=$request->input('actor');
 
-        // dd($director);
         if (empty($director)) {
-            // dd('aaaa');
             return response()->json([
                 'success' => false,
                 'status' => 400,
@@ -187,7 +175,6 @@ class MovieController extends Controller
             ], 400);
         } 
         if (empty($genre)) {
-            // dd('nbbbb');
             return response()->json([
                 'success' => false,
                 'status' => 400,
@@ -204,14 +191,10 @@ class MovieController extends Controller
             $data->year=$request->input('year');
             $data->duration=$request->input('duration');
             $data->save();
-            // dd($data->id);
-    
             
             foreach ($actor as $i => $item) {
-                // dd($request->input('actor')[$i]);
                 $actorid=actor::where('id',$request->input('actor')[$i])->first();
                 if (empty($actorid)) {
-                    // dd('nbbbb');
                     return response()->json([
                         'success' => false,
                         'status' => 400,
