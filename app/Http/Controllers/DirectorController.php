@@ -43,8 +43,6 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd('aaaaaa');
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
@@ -58,15 +56,13 @@ class DirectorController extends Controller
                 'error'=>$validator->errors()
             ], 401);
         }
+       
 
-        $data= new Director();
-        $data->name=$request->input('name');
-        $data->date_of_birth=$request->input('date_of_birth');
-        $data->gender=$request->input('gender');
-
-        if($data->gender == 1 ) {
+        if($request->input('gender') == 1 ) {
+            // dd('aaaaaa');
             $gender = "laki-laki";
-        } else  if($data->gender == 2 ) {
+        } else  if($request->input('gender') == 2 ) {
+            // dd('aaaaaa');
             $gender = "perempuan";
         } else{
             return response()->json([
@@ -75,6 +71,10 @@ class DirectorController extends Controller
                 'message' => 'check inputan your gender'
             ], 400);
         }
+        $data= new Director();
+        $data->name=$request->input('name');
+        $data->date_of_birth=$request->input('date_of_birth');
+        $data->gender=$gender;
 
         if($data->save()){
             $res["message"]="Sukses";
@@ -98,24 +98,77 @@ class DirectorController extends Controller
      */
     public function show($id)
     {
-       
-        //
         $data=Director::where('id',$id)->get();
        
         if(count($data) == 0 ){
-            // dd('gagakllll');
             return response()->json([
                 'success' => false,
                 'status' => 400,
                 'message' => 'Director with id ' . $id . ' not found'
             ], 400);
         }else{
-            // dd('success');
             return response()->json([
                 'success' => true,
                 'status' => 200,
                 'message' => $data
             ], 200);
+        }
+    }
+
+    public function update(Request $request, $id){
+
+        $validator= Validator::make($request->all(),[
+            'name' => 'required|min:3|max:255',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $data=Director::where('id',$id)->first();
+         
+        if (empty($data)) {
+
+            // dd('kosong');
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Director with id ' . $id . ' not found'
+            ], 400);
+        } 
+      
+
+        if($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'status' => 401,
+                'error'=>$validator->errors()
+            ], 401);
+        }
+        if($request->input('gender') == 1 ) {           
+            $gender = "laki-laki";
+        } else  if($request->input('gender') == 2 ) {          
+            $gender = "perempuan";
+        } else{
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'check inputan your gender'
+            ], 400);
+        }
+
+        $data->name=$request->input('name');
+        $data->date_of_birth=$request->input('date_of_birth');
+        $data->gender=$gender;
+
+       
+        if($data->save()){
+            $res["message"]="Sukses";
+            $res["status"]=200;
+            $res["value"]=$data;
+            return response($res);
+        } else{
+            $res["status"]=400;
+            $res["message"]="Gagal";
+            return response($res);
         }
     }
 }

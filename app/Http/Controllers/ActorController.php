@@ -43,8 +43,7 @@ class ActorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd('aaaaaa');
+       
         $validator= Validator::make($request->all(),[
             'name' => 'required|min:3|max:255',
             'date_of_birth' => 'required',
@@ -59,14 +58,11 @@ class ActorController extends Controller
             ], 401);
         }
 
-        $data= new Actor();
-        $data->name=$request->input('name');
-        $data->date_of_birth=$request->input('date_of_birth');
-        $data->gender=$request->input('gender');
-
-        if($data->gender == 1 ) {
+        if($request->input('gender') == 1 ) {
+            // dd('aaaaaa');
             $gender = "laki-laki";
-        } else  if($data->gender == 2 ) {
+        } else  if($request->input('gender') == 2 ) {
+            // dd('aaaaaa');
             $gender = "perempuan";
         } else{
             return response()->json([
@@ -75,6 +71,12 @@ class ActorController extends Controller
                 'message' => 'check inputan your gender'
             ], 400);
         }
+
+        $data= new Actor();
+        $data->name=$request->input('name');
+        $data->date_of_birth=$request->input('date_of_birth');
+        $data->gender=$gender;
+
 
         if($data->save()){
             $res["message"]="Sukses";
@@ -99,7 +101,6 @@ class ActorController extends Controller
     public function show($id)
     {
        
-        //
         $data=Actor::where('id',$id)->get();
        
         if(count($data) == 0 ){
@@ -116,6 +117,61 @@ class ActorController extends Controller
                 'status' => 200,
                 'message' => $data
             ], 200);
+        }
+    }
+
+    public function update(Request $request, $id){
+
+        $validator= Validator::make($request->all(),[
+            'name' => 'required|min:3|max:255',
+            'date_of_birth' => 'required',
+            'gender' => 'required',
+        ]);
+
+        $data=Actor::where('id',$id)->first();
+         
+        if (empty($data)) {
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Actor with id ' . $id . ' not found'
+            ], 400);
+        } 
+      
+
+        if($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'status' => 401,
+                'error'=>$validator->errors()
+            ], 401);
+        }
+        if($request->input('gender') == 1 ) {           
+            $gender = "laki-laki";
+        } else  if($request->input('gender') == 2 ) {          
+            $gender = "perempuan";
+        } else{
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'check inputan your gender'
+            ], 400);
+        }
+// dd($request);
+        $data->name=$request->input('name');
+        $data->date_of_birth=$request->input('date_of_birth');
+        $data->gender=$gender;
+
+       
+        if($data->save()){
+            $res["message"]="Sukses";
+            $res["status"]=200;
+            $res["value"]=$data;
+            return response($res);
+        } else{
+            $res["status"]=400;
+            $res["message"]="Gagal";
+            return response($res);
         }
     }
 }

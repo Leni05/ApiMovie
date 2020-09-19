@@ -18,7 +18,7 @@ class MovieActor extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_movie','id_actor'];
+    protected $fillable = ['movie_id','actor_id'];
 
     // public function movie()
     // {

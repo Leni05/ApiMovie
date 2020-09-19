@@ -14,17 +14,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 //CRUD Gendre
 // Route::group([
 //     'prefix' => 'gendre'
 //   ], function() {
-    Route::get('gendre/', 'GendreController@index');
-    Route::post('/save', 'GendreController@store');
-    Route::get('/{id}', 'GendreController@show');
-    Route::put('/update/{id}', 'GendreController@update');
+    // Route::get('gendre/', 'GendreController@index');
+    // Route::post('/save', 'GendreController@store');
+    // Route::get('/{id}', 'GendreController@show');
+    // Route::put('/update/{id}', 'GendreController@update');
 // });

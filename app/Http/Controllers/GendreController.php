@@ -16,7 +16,7 @@ class GendreController extends Controller
      */
     public function index()
     {
-        dd('a');
+        // dd('a');
         $data = Gendre::all();
   
         return response()->json([
@@ -45,7 +45,7 @@ class GendreController extends Controller
     public function store(Request $request)
     {
         //
-        dd('aaaaaa');
+        // dd('aaaaaa');
         $validator= Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required',
@@ -82,6 +82,7 @@ class GendreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+ 
     public function show($id)
     {
        
@@ -115,7 +116,7 @@ class GendreController extends Controller
          
         if (empty($data)) {
 
-            dd('kosong');
+            // dd('kosong');
             return response()->json([
                 'success' => false,
                 'status' => 400,

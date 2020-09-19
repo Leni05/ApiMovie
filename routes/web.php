@@ -16,29 +16,40 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::post('/mahasiswaapi/store',"GendreController@store1");
+// Route::post('/gendre', [
+//     'uses' => 'GendreController@store',
+//     'nocsrf' => true,
+//  ]);
 //CRUD Gendre
-// Route::prefix('gendre')->group(function () {
-//     Route::get('gendre/', 'GendreController@index');
-//     Route::post('/save', 'GendreController@store');
-//     Route::get('/{id}', 'GendreController@show');
-//     Route::put('/update/{id}', 'GendreController@update');
-// });
+Route::prefix('gendre')->group(function () {
+    Route::get('/', 'GendreController@index');
+    Route::post('/save', 'GendreController@store');
+    Route::get('/{id}', 'GendreController@show');
+    Route::put('/update/{id}', 'GendreController@update');
+});
 
-// Route::prefix('director')->group(function () {
-//     Route::get('/', 'DirectorController@index');
-//     Route::post('/', 'DirectorController@store');
-//     Route::get('/{id}', 'DirectorController@show');
-// });
+//CRUD Director
+Route::prefix('director')->group(function () {
+    Route::get('/', 'DirectorController@index');
+    Route::post('/save', 'DirectorController@store');
+    Route::get('/{id}', 'DirectorController@show');
+    Route::put('/update/{id}', 'DirectorController@update');
+});
 
-// Route::prefix('actor')->group(function () {
-//     Route::get('/', 'ActorController@index');
-//     // Route::post('/', 'DirectorController@store');
-//     // Route::get('/{id}', 'DirectorController@show');
-// });
+//CRUD Actor
+Route::prefix('actor')->group(function () {
+    Route::get('/', 'ActorController@index');
+    Route::post('/save', 'ActorController@store');
+    Route::get('/update/{id}', 'ActorController@update');
+});
 
-// Route::prefix('movie')->group(function () {
-//     Route::get('/', 'MovieController@index');
-//     // Route::post('/', 'DirectorController@store');
-//     Route::get('/{id}', 'MovieController@show');
-// });
+//CRUD Movie
+Route::prefix('movie')->group(function () {
+    Route::get('/', 'MovieController@index');
+    Route::post('/save', 'MovieController@store');
+    Route::get('/{id}', 'MovieController@show');
+    Route::put('/update/{id}', 'MovieController@update');
+});
 
