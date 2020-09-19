@@ -51,5 +51,6 @@ Route::prefix('movie')->group(function () {
     Route::post('/save', 'MovieController@store');
     Route::get('/{id}', 'MovieController@show');
     Route::put('/update/{id}', 'MovieController@update');
+    Route::get('/delete/{id}', 'MovieController@destroy');
 });
 

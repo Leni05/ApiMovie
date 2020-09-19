@@ -209,7 +209,7 @@ class MovieController extends Controller
                
             }
             DB::commit();
-            $data = Movie::with(['director','gendre', 'actor'])->where('id',$data->id)->get();
+            $data = Movie::with(['director','gendre', 'actor'])->where('id',$data->id)->first();
 
             $res["message"]="Sukses";
             $res["status"]=200;
@@ -224,7 +224,36 @@ class MovieController extends Controller
             return response($res);
         }
 
+    }
 
+    public function destroy($id)
+    {
+        $data=Movie::where('id',$id)->first();
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Movie with id ' . $id . ' not found'
+            ], 400);
+        }
+        $movie = Movie::with(['director','gendre', 'actor'])->where('id',$id)->first();
+        $movieactor = MovieActor::where('movie_id',$id)->get();
+        // dd($movieactor);
+       
+        if($movie){
+            
+            $res["message"]="sukses";
+            $res["status"]=200;
+            $res["value"]=$movie;
+          
+            $movieactor->each->delete();
+            $data->delete();
+            return response($res);
+        } else{
+            $res["message"]="gagal";
+            $res["status"]=400;
+            return response($res);
+        }
     }
 
 }
