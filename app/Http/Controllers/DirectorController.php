@@ -123,8 +123,6 @@ class DirectorController extends Controller
         $data=Director::where('id',$id)->first();
          
         if (empty($data)) {
-
-            // dd('kosong');
             return response()->json([
                 'success' => false,
                 'status' => 400,

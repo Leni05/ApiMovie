@@ -44,8 +44,6 @@ class GendreController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd('aaaaaa');
         $validator= Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required',
@@ -85,19 +83,15 @@ class GendreController extends Controller
  
     public function show($id)
     {
-       
-        //
         $data=Gendre::where('id',$id)->get();
        
         if(count($data) == 0 ){
-            // dd('gagakllll');
             return response()->json([
                 'success' => false,
                 'status' => 400,
                 'message' => 'gendre with id ' . $id . ' not found'
             ], 400);
         }else{
-            // dd('success');
             return response()->json([
                 'success' => true,
                 'status' => 200,
